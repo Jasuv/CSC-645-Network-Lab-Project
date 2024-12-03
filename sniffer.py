@@ -17,11 +17,13 @@ def analyze_frame(frame):
         print(f'Source (IP): {ip_layer.src}')
         print(f'Destination (IP): {ip_layer.dst}')
     
+    # prints mac header
     mac_header = bytes(frame)[:14]
     print('\nMAC header')
     for i in range(0, len(mac_header), 8):
         print(' '.join(f'{byte:02x}' for byte in mac_header[i:i+8]))
 
+    # prints payload
     raw_payload = bytes(frame)[14:42]
     print('\nRaw data (28 Bytes)')
     for i in range(0, len(raw_payload), 8):
@@ -41,11 +43,14 @@ if interface not in get_if_list():
     print(f'Invalid interface: {interface}')
     sys.exit(1)
 
+# use Scapy sniffer
 capture = sniff(iface=interface, count=15)
 
+# analyze all frames
 for frame in capture:
     analyze_frame(frame)
     print('-' * 50)
 
+# if specified, save capture to file
 if file_name:
-    wrpcap(file_name, capture)
+    wrpcap(f'{file_name}.pcap', capture)
