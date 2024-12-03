@@ -12,19 +12,18 @@ This Python script captures network packets using the Scapy library, extracts Et
 ```
 python3 sniffer.py <iface> [fname]
 ```
-1. <iface>: the network interface to capture packets from (required)
-2. <fname>: the file to save the captured packets to in PCAP format
+1. **\<iface\>**: the network interface to capture packets from (required)
+2. **\[fname\]**: the file to save the captured packets to in PCAP format
 
-Example Usage:
+**Example**: I capture on **eth0** and save to a file called **capture.pcap**
 ```
 python3 sniffer.py eth0 capture
 ```
 
 ### Output
-Details:
 - Source Mac Address
 - Destination Mac Address
-- If applicable:
+- *If applicable*
   - IP Version
   - Source IP Address
   - Destination IP Address
